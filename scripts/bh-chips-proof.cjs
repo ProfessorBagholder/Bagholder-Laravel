@@ -1,0 +1,20 @@
+const {chromium}=require("playwright");
+(async()=>{
+  const b=await chromium.launch({headless:true});
+  const p=await b.newPage({viewport:{width:1440,height:900}});
+  await p.goto("http://127.0.0.1:43123/",{waitUntil:"networkidle"});
+  await p.waitForTimeout(1200);
+  await p.evaluate(async()=>{ await Livewire.first().setFilter('kind','Options'); });
+  await p.waitForTimeout(1000);
+  let chips=await p.evaluate(()=>[...document.querySelectorAll('.bh-chip')].map(c=>c.innerText.replace(/\s+/g,' ').trim()));
+  console.log('chips_after_kind', chips);
+  if(!chips.some(c=>/Kind/i.test(c)&&/Options/i.test(c))) process.exit(2);
+  await p.locator('.bh-chip-x').first().click();
+  await p.waitForTimeout(900);
+  chips=await p.evaluate(()=>[...document.querySelectorAll('.bh-chip')].map(c=>c.innerText.replace(/\s+/g,' ').trim()));
+  const kind=await p.evaluate(()=>Livewire.first().form.kind);
+  console.log('after_clear', {chips, kind});
+  if(kind!=='') process.exit(3);
+  await b.close();
+  console.log('PASS');
+})().catch(e=>{console.error(e);process.exit(1);});

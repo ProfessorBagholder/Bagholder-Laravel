@@ -1,0 +1,13 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8000"
+    environment:
+      APP_URL: http://127.0.0.1:8080
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000"]
+      interval: 10s
+      timeout: 5s
+      retries: 36
+      start_period: 180s

@@ -1,0 +1,5 @@
+Date,Action,Symbol,Description,Quantity,Price,Amount,Currency
+2025-02-03,buy,VFV,Vanguard S&P 500 Index ETF,10,140.00,-1400.00,CAD
+2025-03-20,sell,VFV,Vanguard S&P 500 Index ETF,-10,146.50,1465.00,CAD
+2025-03-25,dividend,VFV,Quarterly distribution,10,0.22,2.20,CAD
+2025-04-01,buy,SHOP,Shopify Inc.,8,118.00,-944.00,CAD
