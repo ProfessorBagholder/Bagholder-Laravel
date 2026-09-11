@@ -16,9 +16,9 @@ Requires PHP 8.3+, Composer, and Node 20+.
 git clone https://github.com/ProfessorBagholder/Bagholder-Laravel.git
 cd Bagholder-Laravel
 cp .env.example .env
-php artisan key:generate
 touch database/database.sqlite
 composer install
+php artisan key:generate
 npm install && npm run build
 php artisan migrate
 # optional demo book without Wealthsimple:
