@@ -6,7 +6,7 @@ A **separate** Livewire 4 + Flux experiment that ports Bagholder dashboard behav
 
 - Laravel **^13.0**, PHP **8.3+**
 - Livewire **^4.0**
-- Flux free in the default install; **Flux Pro** is a separate step (you enter your license)
+- Flux (free package in the lock; **Pro** via `php artisan flux:activate`)
 
 ## Run on your Mac
 
@@ -21,14 +21,13 @@ npm install && npm run build
 php artisan migrate
 ```
 
-### Install Flux Pro (you enter the license)
+### Flux Pro
 
 ```bash
-composer config http-basic.composer.fluxui.dev YOUR_EMAIL YOUR_LICENSE_KEY
-composer require livewire/flux-pro:^2.18
+php artisan flux:activate
 ```
 
-Or: `php artisan flux:activate` and follow the prompts. Never commit `auth.json`.
+That prompts for your Flux email and license key, writes local `auth.json` (gitignored), and installs `livewire/flux-pro`. Do not commit `auth.json`.
 
 ### Serve
 
@@ -36,7 +35,7 @@ Or: `php artisan flux:activate` and follow the prompts. Never commit `auth.json`
 BAGHOLDER_DRY_ORDERS=1 php artisan serve --host=127.0.0.1 --port=43123
 ```
 
-In another terminal (brackets / order ticks while Orders is closed):
+In another terminal:
 
 ```bash
 php artisan schedule:work
